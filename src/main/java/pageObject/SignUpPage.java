@@ -2,13 +2,15 @@ package pageObject;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+
 import static org.junit.Assert.assertTrue;
 
-public class RegistrationPage {
+public class SignUpPage {
     private WebDriver driver;
 
-    public RegistrationPage (WebDriver driver) {
+    public SignUpPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -24,18 +26,24 @@ public class RegistrationPage {
     //Кнопка зарегистрироваться
     public By registrationButton = By.xpath(".//*[@id=\"root\"]/div/main/div/form/button");
 
+    //Ошибка при некорректном пароле
+    public By errorIncorrectPassword = By.xpath(".//*[@id=\"root\"]/div/main/div/form/fieldset[3]/div/p");
+
+    //Кнопка для авторизации
+    public By signInButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p/a");
+
     //Заполнить имя
     @Step("Fill the name")
-    public void fillNameField(String name){
+    public void fillNameField(String name) {
         assertTrue(driver.findElement(nameField).isEnabled());
-       driver.findElement(nameField).clear();
+        driver.findElement(nameField).clear();
         driver.findElement(nameField).sendKeys(name);
 
     }
 
     //Заполнить емейл
     @Step("Fill the email")
-    public void fillEmailField(String email){
+    public void fillEmailField(String email) {
         assertTrue(driver.findElement(emailField).isEnabled());
         driver.findElement(emailField).clear();
         driver.findElement(emailField).sendKeys(email);
@@ -44,14 +52,14 @@ public class RegistrationPage {
 
     //Заполнить пароль
     @Step("Fill the password")
-    public void fillPasswordField(String password){
+    public void fillPasswordField(String password) {
         assertTrue(driver.findElement(passwordField).isEnabled());
         driver.findElement(passwordField).clear();
         driver.findElement(passwordField).sendKeys(password);
     }
 
     //Нажать на кнопку регистрации
-    public void clickSignUpButton(){
+    public void clickSignUpButton() {
         driver.findElement(registrationButton).click();
     }
 
@@ -65,6 +73,19 @@ public class RegistrationPage {
         clickSignUpButton();
 
 
+    }
+
+    //Проверить ошибку в пароле
+    @Step("Check password error")
+    public void checkPasswordError() {
+        assertTrue(driver.findElement(errorIncorrectPassword).isEnabled());
+    }
+
+    //Нажатие на кнопку авторизации
+    @Step("Click signIn button")
+    public void clickSignInButton() {
+        driver.findElement(signInButton).click();
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(signInButton));
     }
 
 }

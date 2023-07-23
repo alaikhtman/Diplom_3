@@ -2,18 +2,17 @@ package pageObject;
 
 import io.qameta.allure.Step;
 import static org.junit.Assert.*;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.util.Locale;
 
-public class PrivateAreaPage {
+public class PersonalAreaPage {
+
     private WebDriver driver;
 
-    public PrivateAreaPage(WebDriver driver) {
+    public PersonalAreaPage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -25,20 +24,14 @@ public class PrivateAreaPage {
 
 
     //Кнопка выхода
-    public By exitButton = By.xpath(".//*[@id=\"root\"]/div/main/div/nav/ul/li[3]/button[text()='Выход']");
-
-    //Кнопка конструктора
-    public By headerConstructionButton = By.className("AppHeader_header__linkText__3q_va ml-2");
-
-    //Логотип
-    public By headerLogotypeButton = By.className("AppHeader_header__logo__2D0X2");
+    public By exitButton = By.xpath(".//*[@id=\"root\"]/div/main/div/nav/ul/li[3]/button");
 
 
+
+    //Ожидание загрузки страницы с данными
     public void waitUntilAccountDetails() {
-
         new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.visibilityOfElementLocated(nameField));
-
 
     }
 
@@ -61,20 +54,10 @@ public class PrivateAreaPage {
     //Нажать на выход
     @Step("Click exit button")
     public void clickExit() {
+        waitUntilAccountDetails();
         driver.findElement(exitButton).click();
     }
 
-    //Нажать на конструктор
-    @Step("Click construction button")
-    public void clickConstruction() {
-        driver.findElement(headerConstructionButton).click();
-    }
-
-    //Нажать на логотип
-    @Step("Click logotype")
-    public void clickLogotype() {
-        driver.findElement(headerLogotypeButton).click();
-    }
 
     //Проверить данные
     public void checkAccountsData(String name, String email) {

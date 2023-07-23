@@ -1,14 +1,17 @@
 import io.qameta.allure.junit4.DisplayName;
 import jdk.jfr.Description;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.junit.Before;
 import org.junit.Test;
-import pageObject.AuthPage;
-import pageObject.ConstructionPage;
-import pageObject.PrivateAreaPage;
-import pageObject.RegistrationPage;
+import pageObject.*;
 
 
-public class RegistrationTest extends BaseTest {
+public class SignUpTest extends BaseTest {
+
+    @Before
+    public void setUp() {
+        startUp("chrome");
+    }
 
     @Test
     @DisplayName("SignUp: positive flow")
@@ -19,20 +22,9 @@ public class RegistrationTest extends BaseTest {
         String email = RandomStringUtils.randomAlphabetic(10) + "@mail.ru";
         String password = RandomStringUtils.randomAlphabetic(10);
 
-        ConstructionPage constructionPage = new ConstructionPage(driver);
-        constructionPage.clickPrivateArea();
-
-        AuthPage authPage = new AuthPage(driver);
-        authPage.clickRegistrationButton();
-
-        RegistrationPage registrationPage = new RegistrationPage(driver);
-        registrationPage.signUpUser(name, email, password);
-
-        authPage.signInUser(email, password);
-        constructionPage.clickPrivateArea();
-
-        PrivateAreaPage privateAreaPage = new PrivateAreaPage(driver);
-        privateAreaPage.checkAccountsData(name, email);
+        signUpUser(name, email, password);
+        signInUser(email, password);
+        checkAccountData(name, email);
 
 
     }
@@ -40,8 +32,16 @@ public class RegistrationTest extends BaseTest {
     @Test
     @DisplayName("SignUp: incorrect password (less than 6 symbols)")
     @Description("Sign Up user: negative flow for unsuccessfully registration when password less than 6 symbols")
-
     public void registrationUnsuccessfullyIncorrectPasswordTest() {
+        String name = RandomStringUtils.randomAlphabetic(10);
+        String email = RandomStringUtils.randomAlphabetic(10) + "@mail.ru";
+        String password = RandomStringUtils.randomAlphabetic(4);
+
+        signUpUser(name, email, password);
+
+        SignUpPage signUpPage = new SignUpPage(driver);
+        signUpPage.checkPasswordError();
+
 
     }
 }

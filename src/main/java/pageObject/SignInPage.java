@@ -5,19 +5,18 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import static org.junit.Assert.assertTrue;
 
-public class AuthPage {
+public class SignInPage {
 
     private WebDriver driver;
 
-    public AuthPage(WebDriver driver) {
+    public SignInPage(WebDriver driver) {
         this.driver = driver;
     }
 
     //Кнопка регистрации
-    public By registrationButton = By.className("Auth_link__1fOlj");
+    public By registrationButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p[1]/a");
 
     //Кнопка входа
     public By entranceButton = By.xpath(".//*[@id=\"root\"]/div/main/div/form/button");
@@ -28,13 +27,18 @@ public class AuthPage {
     //Поле пароля
     public By passwordField = By.xpath(".//*[@id=\"root\"]/div/main/div/form/fieldset[2]/div/div/input");
 
+    //Текст Вход
     public By entranceText = By.xpath(".//*[@id=\"root\"]/div/main/div/h2[text()='Вход']");
+
+
+
+    //Кнопка для восстановления пароля
+    public By restorePasswordButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p[2]/a");
 
 
     //Заполнить емейл
     @Step("Fill an email")
     public void fillEmailField(String email) {
-
         assertTrue(driver.findElement(emailField).isEnabled());
         driver.findElement(emailField).clear();
         driver.findElement(emailField).sendKeys(email);
@@ -62,21 +66,37 @@ public class AuthPage {
         driver.findElement(entranceButton).click();
     }
 
+
+
+    //Нажатие на кнопку забыл пароль
+    @Step("Click password button")
+    public void clickPasswordRestoreButton() {
+        driver.findElement(restorePasswordButton).click();
+         }
+
     //Ожидание загрузки страницы
-    public void waitAuthPage() {
+    public void waitSignInPage() {
         new WebDriverWait(driver, 20)
                 .until(ExpectedConditions.visibilityOfElementLocated(entranceText));
 
     }
 
+
     //Авторизовать пользователя
     @Step("Sign in user")
     public void signInUser(String email, String password) {
-        waitAuthPage();
+        waitSignInPage();
         fillEmailField(email);
         fillPasswordField(password);
         clickEntranceButton();
 
+    }
+
+    //Нажатие кнопки авторизации
+    public void checkSignInPage() {
+        waitSignInPage();
+        assert(driver.findElement(emailField).getAttribute("value").isEmpty());
+        assert(driver.findElement(passwordField).getAttribute("value").isEmpty());
     }
 
 }
