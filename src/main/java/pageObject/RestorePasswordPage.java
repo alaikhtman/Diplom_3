@@ -1,5 +1,6 @@
 package pageObject;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -27,6 +28,7 @@ public class RestorePasswordPage {
     }
 
     //Нажатие кнопки авторизации
+    @Step("Click signIn button on restore page")
     public void clickSignInButton() {
         waitRestorePage();
         driver.findElement(signInButton).click();

@@ -8,11 +8,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.Locale;
 
-public class PersonalAreaPage {
+public class ProfilePage {
 
     private WebDriver driver;
 
-    public PersonalAreaPage(WebDriver driver) {
+    public ProfilePage(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -21,7 +21,6 @@ public class PersonalAreaPage {
 
     //Поле имейла
     public By emailField = By.xpath(".//*[@id=\"root\"]/div/main/div/div/div/ul/li[2]/div/div/input");
-
 
     //Кнопка выхода
     public By exitButton = By.xpath(".//*[@id=\"root\"]/div/main/div/nav/ul/li[3]/button");
@@ -60,6 +59,7 @@ public class PersonalAreaPage {
 
 
     //Проверить данные
+    @Step("Check account's data")
     public void checkAccountsData(String name, String email) {
         waitUntilAccountDetails();
         String formattedEmail = email.toLowerCase(Locale.ROOT);

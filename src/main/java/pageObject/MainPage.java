@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static config.Config.URL;
 import static org.junit.Assert.assertEquals;
 
 public class MainPage {
@@ -30,28 +31,28 @@ public class MainPage {
     private By pageText = By.xpath(".//*[@id=\"root\"]/div/main/section[1]/h1");
 
 
-    //Нажать  на раздел "Булки"
+    //Нажать на раздел "Булки"
     @Step("Select buns section")
     public void selectBuns() {
         driver.findElement(bunSection).click();
     }
 
 
-    //Нажать  на раздел "Соусы"
+    //Нажать на раздел "Соусы"
     @Step("Select sauces section")
     public void selectSauce() {
         driver.findElement(saucesSection).click();
     }
 
 
-    //Нажать  на раздел "Начинки"
+    //Нажать на раздел "Начинки"
     @Step("Select fillings section")
     public void selectFilling() {
         driver.findElement(fillingsSection).click();
     }
 
     //Нажатие на кнопку личного кабинета
-    @Step("Click signIn button")
+    @Step("Click signIn button on main page")
     public void clickSignInButton() {
         waitMainPage();
         driver.findElement(signInButton).click();
@@ -66,14 +67,14 @@ public class MainPage {
     }
 
     //Проверить раздел "Булки"
-    @Step("Check buns section")
+    @Step("Check buns section is selected")
     public void checkBuns() {
         assertEquals("tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect", driver.findElement(bunSection).getAttribute("class"));
     }
 
 
     //Проверить раздел "Соусы"
-    @Step("Check sauces section")
+    @Step("Check sauces section is selected")
     public void checkSauce() {
         assertEquals("tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect", driver.findElement(saucesSection).getAttribute("class"));
 
@@ -81,16 +82,17 @@ public class MainPage {
 
 
     //Проверить раздел "Начинки"
-    @Step("Check fillings section")
+    @Step("Check fillings section is selected")
     public void checkFilling() {
         assertEquals("tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect", driver.findElement(fillingsSection).getAttribute("class"));
 
     }
 
     //Проверить загрузку страницы
-    @Step("Check main page")
+    @Step("Check main page is loaded")
     public void checkMainPage() {
         waitMainPage();
+        assertEquals(URL, driver.getCurrentUrl());
         assert (driver.findElement(bunSection).isDisplayed());
         assert (driver.findElement(saucesSection).isDisplayed());
         assert (driver.findElement(fillingsSection).isDisplayed());

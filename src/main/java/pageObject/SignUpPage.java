@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-
 import static org.junit.Assert.assertTrue;
 
 public class SignUpPage {
@@ -59,6 +58,7 @@ public class SignUpPage {
     }
 
     //Нажать на кнопку регистрации
+    @Step("Click signUp button on signUp form")
     public void clickSignUpButton() {
         driver.findElement(registrationButton).click();
     }
@@ -71,8 +71,6 @@ public class SignUpPage {
         fillEmailField(email);
         fillPasswordField(password);
         clickSignUpButton();
-
-
     }
 
     //Проверить ошибку в пароле
@@ -82,7 +80,7 @@ public class SignUpPage {
     }
 
     //Нажатие на кнопку авторизации
-    @Step("Click signIn button")
+    @Step("Click signIn button on signUp page")
     public void clickSignInButton() {
         driver.findElement(signInButton).click();
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", driver.findElement(signInButton));

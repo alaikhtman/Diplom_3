@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import pageObject.*;
 
-public class SignInTest extends BaseTest {
 
+public class SignInTest extends BaseTest {
 
     String name = RandomStringUtils.randomAlphabetic(10);
     String email = RandomStringUtils.randomAlphabetic(10) + "@mail.ru";
@@ -15,30 +15,26 @@ public class SignInTest extends BaseTest {
     @Before
     public void setUp() {
         startUp("yandex");
+        signUpUser(name, email, password);
+        openMainPage();
     }
 
     @Test
-    @DisplayName("SignIn: positive flow on private area")
-    @Description("Sign In user: positive flow for successfully sign in on private area")
+    @DisplayName("SignIn: positive flow on profile")
+    @Description("Sign in user: positive flow for successfully sign in on profile page")
     public void signInPrivateArea() {
-        signUpUser(name, email, password);
-        HeaderPage header = new HeaderPage(driver);
-        header.clickLogotype();
 
-        header.clickPrivateArea();
+        HeaderPage header = new HeaderPage(driver);
+        header.clickProfileButton();
         signInUser(email, password);
         checkAccountData(name, email);
-
 
     }
 
     @Test
     @DisplayName("SignIn: positive flow on main page")
-    @Description("Sign In user: positive flow for successfully sign in on main page")
+    @Description("Sign in user: positive flow for successfully sign in on main page")
     public void signInMainPage() {
-        signUpUser(name, email, password);
-        HeaderPage header = new HeaderPage(driver);
-        header.clickLogotype();
 
         MainPage mainPage = new MainPage(driver);
         mainPage.clickSignInButton();
@@ -51,14 +47,14 @@ public class SignInTest extends BaseTest {
 
     @Test
     @DisplayName("SignIn: positive flow on sign up page")
-    @Description("Sign In user: positive flow for successfully sign in on sign up page")
+    @Description("Sign in user: positive flow for successfully sign in on sign up page")
     public void signInSignUp() {
-        signUpUser(name, email, password);
+
         HeaderPage header = new HeaderPage(driver);
-        header.clickPrivateArea();
+        header.clickProfileButton();
 
         SignInPage signInPage = new SignInPage(driver);
-        signInPage.clickRegistrationButton();
+        signInPage.clickSignUpButton();
 
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.clickSignInButton();
@@ -70,12 +66,11 @@ public class SignInTest extends BaseTest {
 
     @Test
     @DisplayName("SignIn: positive flow on restore password page")
-    @Description("Sign In user: positive flow for successfully sign in on restore password page")
+    @Description("Sign in user: positive flow for successfully sign in on restore password page")
     public void signInRestorePassword() {
 
-        signUpUser(name, email, password);
         HeaderPage header = new HeaderPage(driver);
-        header.clickPrivateArea();
+        header.clickProfileButton();
 
         SignInPage signInPage = new SignInPage(driver);
         signInPage.clickPasswordRestoreButton();

@@ -5,6 +5,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static config.Config.LOGIN_URL;
+import static config.Config.URL;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class SignInPage {
@@ -16,7 +20,7 @@ public class SignInPage {
     }
 
     //Кнопка регистрации
-    public By registrationButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p[1]/a");
+    public By signUpButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p[1]/a");
 
     //Кнопка входа
     public By entranceButton = By.xpath(".//*[@id=\"root\"]/div/main/div/form/button");
@@ -29,7 +33,6 @@ public class SignInPage {
 
     //Текст Вход
     public By entranceText = By.xpath(".//*[@id=\"root\"]/div/main/div/h2[text()='Вход']");
-
 
 
     //Кнопка для восстановления пароля
@@ -55,9 +58,9 @@ public class SignInPage {
 
 
     //Нажатие на кнопку регистрации
-    @Step("Click registration button")
-    public void clickRegistrationButton() {
-        driver.findElement(registrationButton).click();
+    @Step("Click signUp button")
+    public void clickSignUpButton() {
+        driver.findElement(signUpButton).click();
     }
 
     //Нажатие на кнопку войти
@@ -65,7 +68,6 @@ public class SignInPage {
     public void clickEntranceButton() {
         driver.findElement(entranceButton).click();
     }
-
 
 
     //Нажатие на кнопку забыл пароль
@@ -93,8 +95,10 @@ public class SignInPage {
     }
 
     //Нажатие кнопки авторизации
-    public void checkSignInPage() {
+    @Step("Check empty signIn page is loaded")
+    public void checkEmptySignInPage() {
         waitSignInPage();
+        assertEquals(LOGIN_URL, driver.getCurrentUrl());
         assert(driver.findElement(emailField).getAttribute("value").isEmpty());
         assert(driver.findElement(passwordField).getAttribute("value").isEmpty());
     }
