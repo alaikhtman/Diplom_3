@@ -17,13 +17,13 @@ public class ProfilePage {
     }
 
     //Поле имени
-    public By nameField = By.xpath(".//*[@id=\"root\"]/div/main/div/div/div/ul/li[1]/div/div/input");
+    public By nameField = By.xpath(".//li[1]/div/div/input");
 
     //Поле имейла
-    public By emailField = By.xpath(".//*[@id=\"root\"]/div/main/div/div/div/ul/li[2]/div/div/input");
+    public By emailField = By.xpath(".//li[2]/div/div/input");
 
     //Кнопка выхода
-    public By exitButton = By.xpath(".//*[@id=\"root\"]/div/main/div/nav/ul/li[3]/button");
+    public By exitButton = By.xpath(".//button[text()='Выход']");
 
 
 

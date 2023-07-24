@@ -15,10 +15,10 @@ public class RestorePasswordPage {
     }
 
     //Кнопка авторизации
-    public By signInButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p/a");
+    public By signInButton =  By.linkText("Войти");
 
     //Текст страницы
-    public By restorePasswordText = By.xpath((".//*[@id=\"root\"]/div/main/div/h2"));
+    public By restorePasswordText = By.xpath((".//*[text()= 'Восстановление пароля']"));
 
     //Ожидание загрузки страницы
     public void waitRestorePage() {

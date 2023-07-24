@@ -18,17 +18,17 @@ public class MainPage {
 
 
     //Раздел "Булки"
-    private By bunSection = By.xpath(".//*[@id=\"root\"]/div/main/section[1]/div[1]/div[1]");
+    private By bunSection = By.xpath(".//div/span[text()='Булки']/..");
     //Раздел "Соусы"
-    private By saucesSection = By.xpath(".//*[@id=\"root\"]/div/main/section[1]/div[1]/div[2]");
+    private By saucesSection = By.xpath(".//div/span[text()='Соусы']/..");
     //Раздел "Начинки"
-    private By fillingsSection = By.xpath(".//*[@id=\"root\"]/div/main/section[1]/div[1]/div[3]");
+    private By fillingsSection = By.xpath(".//div/span[text()='Начинки']/..");
 
     //Кнопка войти в аккаунт
-    private By signInButton = By.xpath(".//*[@id=\"root\"]/div/main/section[2]/div/button");
+    private By signInButton = By.xpath("//*[text()= 'Войти в аккаунт']");
 
     //Текст страницы
-    private By pageText = By.xpath(".//*[@id=\"root\"]/div/main/section[1]/h1");
+    private By pageText = By.xpath(".//*[text()= 'Соберите бургер']");
 
 
     //Нажать на раздел "Булки"

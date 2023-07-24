@@ -14,13 +14,13 @@ public class HeaderPage {
     }
 
     //Кнопка главной страницы
-    private By headerMainPageButton = By.xpath(".//*[@id=\"root\"]/div/header/nav/ul/li[1]/a");
+    private By headerMainPageButton = By.xpath(".//*[text()= 'Конструктор']");;
 
     //Логотип
-    private By headerLogotypeButton = By.xpath(".//*[@id=\"root\"]/div/header/nav/div/a");
+    private By headerLogotypeButton = By.className("AppHeader_header__logo__2D0X2");
 
     //Кнопка личного кабинета
-    private By headerProfileButton = By.xpath(".//*[@id=\"root\"]/div/header/nav/a");
+    private By headerProfileButton = By.linkText("Личный Кабинет");
 
 
     //Нажать на кнопку главной страницы

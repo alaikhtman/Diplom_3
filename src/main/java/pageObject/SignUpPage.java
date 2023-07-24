@@ -14,22 +14,22 @@ public class SignUpPage {
     }
 
     //Поел имени
-    public By nameField = By.xpath(".//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input");
+    public By nameField = By.xpath(".//fieldset[1]//input");
 
     //Поле имейла
-    public By emailField = By.xpath(".//*[@id=\"root\"]/div/main/div/form/fieldset[2]/div/div/input");
+    public By emailField =By.xpath(".//fieldset[2]//input");
 
     //Поле пароля
-    public By passwordField = By.xpath(".//*[@id=\"root\"]/div/main/div/form/fieldset[3]/div/div/input");
+    public By passwordField = By.xpath(".//input[@type= 'password']");
 
     //Кнопка зарегистрироваться
-    public By registrationButton = By.xpath(".//*[@id=\"root\"]/div/main/div/form/button");
+    public By registrationButton = By.xpath(".//button[text()= 'Зарегистрироваться']");
 
     //Ошибка при некорректном пароле
-    public By errorIncorrectPassword = By.xpath(".//*[@id=\"root\"]/div/main/div/form/fieldset[3]/div/p");
+    public By errorIncorrectPassword = By.className("input__error");;
 
     //Кнопка для авторизации
-    public By signInButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p/a");
+    public By signInButton = By.className("Auth_link__1fOlj");
 
     //Заполнить имя
     @Step("Fill the name")

@@ -20,23 +20,23 @@ public class SignInPage {
     }
 
     //Кнопка регистрации
-    public By signUpButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p[1]/a");
+    public By signUpButton = By.xpath(".//p[1]/a");
 
     //Кнопка входа
-    public By entranceButton = By.xpath(".//*[@id=\"root\"]/div/main/div/form/button");
+    public By entranceButton = By.xpath(".//button[text()='Войти']");
 
     //Поле имейла
-    public By emailField = By.xpath(".//*[@id=\"root\"]/div/main/div/form/fieldset[1]/div/div/input");
+    public By emailField = By.xpath(".//fieldset[1]//input");
 
     //Поле пароля
-    public By passwordField = By.xpath(".//*[@id=\"root\"]/div/main/div/form/fieldset[2]/div/div/input");
+    public By passwordField = By.xpath(".//fieldset[2]//input");
 
     //Текст Вход
-    public By entranceText = By.xpath(".//*[@id=\"root\"]/div/main/div/h2[text()='Вход']");
+    public By entranceText = By.xpath(".//*[text()='Вход']");
 
 
     //Кнопка для восстановления пароля
-    public By restorePasswordButton = By.xpath(".//*[@id=\"root\"]/div/main/div/div/p[2]/a");
+    public By restorePasswordButton = By.xpath(".//p[2]/a");
 
 
     //Заполнить емейл
