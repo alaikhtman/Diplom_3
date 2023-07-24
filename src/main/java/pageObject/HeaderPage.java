@@ -14,7 +14,7 @@ public class HeaderPage {
     }
 
     //Кнопка главной страницы
-    private By headerMainPageButton = By.xpath(".//*[text()= 'Конструктор']");;
+    private By headerMainPageButton = By.xpath(".//*[text()= 'Конструктор']");
 
     //Логотип
     private By headerLogotypeButton = By.className("AppHeader_header__logo__2D0X2");
