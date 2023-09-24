@@ -16,6 +16,7 @@ public class GeneralPage {
         this.driver = driver;
     }
 
+
     // Find email field
     private By emailField = By.id("cl_login");
 

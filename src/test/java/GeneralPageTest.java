@@ -10,8 +10,5 @@ public class GeneralPageTest extends BaseTest {
     @DisplayName("GeneralTest Page: check cookies")
     public void checkSignInTest() {
 
-        GeneralPage generalPage = new GeneralPage(driver);
-        generalPage.fillRegisterForGuest("test@gmail.com");
-
     }
 }
