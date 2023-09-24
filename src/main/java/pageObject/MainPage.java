@@ -2,14 +2,17 @@ package pageObject;
 
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static config.Config.URL;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 
 public class MainPage {
+
     private WebDriver driver;
 
     public MainPage(WebDriver driver) {
@@ -17,86 +20,49 @@ public class MainPage {
     }
 
 
-    //Раздел "Булки"
-    private By bunSection = By.xpath(".//div/span[text()='Булки']/..");
-    //Раздел "Соусы"
-    private By saucesSection = By.xpath(".//div/span[text()='Соусы']/..");
-    //Раздел "Начинки"
-    private By fillingsSection = By.xpath(".//div/span[text()='Начинки']/..");
+    //Products section
+    private By productElements = By.className("product-panel    ");
 
-    //Кнопка войти в аккаунт
-    private By signInButton = By.xpath("//*[text()= 'Войти в аккаунт']");
+    //Button "zum Antrag"
+    private By applyButton = By.xpath(".//a[@href ='https://finanzen.check24.de/accounts/d/daf-entry/creditcard?productNames=norwegian-visa-resumable&BANK_PRODUCT_ID=501880&cpid=checkbank&wpset=default&b2bid=50&deviceoutput=desktop']");
 
-    //Текст страницы
-    private By pageText = By.xpath(".//*[text()= 'Соберите бургер']");
+    //Cookie
+    Cookie cookie = driver.manage().getCookieNamed("ppset");
+
+    //Button accept cookie info "Geht klar"
+    private By okButton = By.xpath(".//*[text()='Geht klar']");
 
 
-    //Нажать на раздел "Булки"
-    @Step("Select buns section")
-    public void selectBuns() {
-        driver.findElement(bunSection).click();
+    @Step("Accept cookies info")
+    public void acceptCookieInfo() {
+        assertTrue(driver.findElement(okButton).isEnabled());
+        driver.findElement(okButton);
     }
 
 
-    //Нажать на раздел "Соусы"
-    @Step("Select sauces section")
-    public void selectSauce() {
-        driver.findElement(saucesSection).click();
+    @Step("Click button 'zum Antrag'")
+    public void clickApplyButton() {
+        driver.findElement(applyButton).click();
     }
 
 
-    //Нажать на раздел "Начинки"
-    @Step("Select fillings section")
-    public void selectFilling() {
-        driver.findElement(fillingsSection).click();
-    }
 
-    //Нажатие на кнопку личного кабинета
-    @Step("Click signIn button on main page")
-    public void clickSignInButton() {
-        waitMainPage();
-        driver.findElement(signInButton).click();
-
-    }
-
-    //Ожидание загрузки страницы
+    //Load Main Page
     public void waitMainPage() {
-        new WebDriverWait(driver, 20)
-                .until(ExpectedConditions.visibilityOfElementLocated(pageText));
+        new WebDriverWait(driver, 20 )
+                .until(ExpectedConditions.visibilityOfElementLocated(productElements));
 
     }
 
-    //Проверить раздел "Булки"
-    @Step("Check buns section is selected")
-    public void checkBuns() {
-        assertEquals("tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect", driver.findElement(bunSection).getAttribute("class"));
-    }
-
-
-    //Проверить раздел "Соусы"
-    @Step("Check sauces section is selected")
-    public void checkSauce() {
-        assertEquals("tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect", driver.findElement(saucesSection).getAttribute("class"));
-
-    }
-
-
-    //Проверить раздел "Начинки"
-    @Step("Check fillings section is selected")
-    public void checkFilling() {
-        assertEquals("tab_tab__1SPyG tab_tab_type_current__2BEPc pt-4 pr-10 pb-4 pl-10 noselect", driver.findElement(fillingsSection).getAttribute("class"));
-
-    }
-
-    //Проверить загрузку страницы
-    @Step("Check main page is loaded")
-    public void checkMainPage() {
+    //Check cookies
+    @Step("Check cookies for main page")
+    public void checkCookies(String cookieName) {
         waitMainPage();
-        assertEquals(URL, driver.getCurrentUrl());
-        assert (driver.findElement(bunSection).isDisplayed());
-        assert (driver.findElement(saucesSection).isDisplayed());
-        assert (driver.findElement(fillingsSection).isDisplayed());
+        assertEquals(cookieName, cookie);
     }
+
+
+
 
 
 }
